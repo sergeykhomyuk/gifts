@@ -1,0 +1,18 @@
+Please explain what is wrong with this code and what the observed behaviour might be in
+a component that included it.
+this.setState({count: this.state.count + 1})
+
+`this.setState` doesn't update state immediately, so `this.state.count` could contain an old value. This issue could be solved by using `setState` callback: `this.setState((state) => ({count: state.count + 1}))`
+
+
+
+Can you please explain how Redux works, assuming you were talking to a non-technical
+audience.
+
+Redux is a state management pattern with 3 main concepts: state, action, and reducer.
+Imagine that you want to play chess with your friend, but you still cannot meet in person because of the COVID restrictions. So you decided to try a new trendy thing called Redux-Chess.
+The idea of Redux-Chess is that there is a 3rd party organization that manages chess board for you - it setups figures on a board for a game (initial state), installs a camera, so you can see the chessboard (current state), and assigns a person who moves figures for you.
+So each time when you want to make a turn - you send a message to the 3rd party saying what kind of action you want to take (move some figure, gave-up, start a new game) + some payload (e.g. for move it would be coordinates of figure you want to move + where you what to move it) - this called a Redux-Action.
+Then assigned person also known as Redux-Reducer receives your Redux-Action message and executes it by re-arranging figures on the board. So after each of your or your opponent's actions, there is a new chessboard state available, which you can observe through the camera.
+
+That's could be pretty handy, since you don't need to have your board, so there is no chance that your cat would accidentally (or deliberately) would re-arrange figures while you were making another cup of tea. Plus, even if there would be an earthquake - you still have the entire history of messages, so you can restore the board layout simply by re-playing actions one by one.

@@ -14,7 +14,15 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@and-open/gifts/core": ["libs/gifts/core/src/index.ts"],
+      "@and-open/gifts/store": ["libs/gifts/store/src/index.ts"],
+      "@and-open/gifts/api": ["libs/gifts/api/src/index.ts"],
+      "@and-open/core/api": ["libs/core/api/src/index.ts"],
+      "@and-open/gifts/shell": ["libs/gifts/shell/src/index.ts"],
+      "@and-open/gifts/ui": ["libs/gifts/ui/src/index.ts"],
+      "@and-open/core/utils": ["libs/core/utils/src/index.ts"]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }

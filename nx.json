@@ -20,11 +20,35 @@
   },
   "projects": {
     "gifts": {
-      "tags": []
+      "tags": ["type:app"]
     },
     "gifts-e2e": {
       "tags": [],
       "implicitDependencies": ["gifts"]
+    },
+    "api": {
+      "tags": []
+    },
+    "gifts-core": {
+      "tags": ["type:core"]
+    },
+    "gifts-store": {
+      "tags": ["type:store"]
+    },
+    "gifts-api": {
+      "tags": ["type:api"]
+    },
+    "core-api": {
+      "tags": ["type:api"]
+    },
+    "gifts-shell": {
+      "tags": ["type:shell"]
+    },
+    "gifts-ui": {
+      "tags": ["type:common"]
+    },
+    "core-utils": {
+      "tags": ["type:core"]
     }
   }
 }

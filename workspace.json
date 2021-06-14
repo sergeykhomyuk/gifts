@@ -38,7 +38,10 @@
             "polyfills": "apps/gifts/src/polyfills.ts",
             "tsConfig": "apps/gifts/tsconfig.app.json",
             "assets": ["apps/gifts/src/favicon.ico", "apps/gifts/src/assets"],
-            "styles": ["apps/gifts/src/styles.scss"],
+            "styles": [
+              "apps/gifts/src/styles.scss",
+              "node_modules/antd/dist/antd.css"
+            ],
             "scripts": [],
             "webpackConfig": "@nrwl/react/plugins/webpack"
           },
@@ -71,7 +74,8 @@
           "executor": "@nrwl/web:dev-server",
           "options": {
             "buildTarget": "gifts:build",
-            "hmr": true
+            "hmr": true,
+            "proxyConfig": "apps/gifts/proxy.conf.json"
           },
           "configurations": {
             "production": {
@@ -118,6 +122,203 @@
           "executor": "@nrwl/linter:eslint",
           "options": {
             "lintFilePatterns": ["apps/gifts-e2e/**/*.{js,ts}"]
+          }
+        }
+      }
+    },
+    "api": {
+      "root": "apps/api",
+      "sourceRoot": "apps/api/src",
+      "projectType": "application",
+      "targets": {
+        "build": {
+          "executor": "@nrwl/node:build",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "outputPath": "dist/apps/api",
+            "main": "apps/api/src/main.ts",
+            "tsConfig": "apps/api/tsconfig.app.json",
+            "assets": ["apps/api/src/assets"]
+          },
+          "configurations": {
+            "production": {
+              "optimization": true,
+              "extractLicenses": true,
+              "inspect": false,
+              "fileReplacements": [
+                {
+                  "replace": "apps/api/src/environments/environment.ts",
+                  "with": "apps/api/src/environments/environment.prod.ts"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "executor": "@nrwl/node:execute",
+          "options": {
+            "buildTarget": "api:build"
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["apps/api/**/*.ts"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/apps/api"],
+          "options": {
+            "jestConfig": "apps/api/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "gifts-core": {
+      "root": "libs/gifts/core",
+      "sourceRoot": "libs/gifts/core/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/gifts/core/**/*.ts"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/gifts/core"],
+          "options": {
+            "jestConfig": "libs/gifts/core/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "gifts-store": {
+      "root": "libs/gifts/store",
+      "sourceRoot": "libs/gifts/store/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/gifts/store/**/*.ts"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/gifts/store"],
+          "options": {
+            "jestConfig": "libs/gifts/store/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "gifts-api": {
+      "root": "libs/gifts/api",
+      "sourceRoot": "libs/gifts/api/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/gifts/api/**/*.ts"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/gifts/api"],
+          "options": {
+            "jestConfig": "libs/gifts/api/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "core-api": {
+      "root": "libs/core/api",
+      "sourceRoot": "libs/core/api/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/core/api/**/*.ts"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/core/api"],
+          "options": {
+            "jestConfig": "libs/core/api/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "gifts-shell": {
+      "root": "libs/gifts/shell",
+      "sourceRoot": "libs/gifts/shell/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/gifts/shell/**/*.{ts,tsx,js,jsx}"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/gifts/shell"],
+          "options": {
+            "jestConfig": "libs/gifts/shell/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "gifts-ui": {
+      "root": "libs/gifts/ui",
+      "sourceRoot": "libs/gifts/ui/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/gifts/ui/**/*.{ts,tsx,js,jsx}"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/gifts/ui"],
+          "options": {
+            "jestConfig": "libs/gifts/ui/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "core-utils": {
+      "root": "libs/core/utils",
+      "sourceRoot": "libs/core/utils/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/core/utils/**/*.ts"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/core/utils"],
+          "options": {
+            "jestConfig": "libs/core/utils/jest.config.js",
+            "passWithNoTests": true
           }
         }
       }
